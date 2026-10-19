@@ -1,6 +1,6 @@
 # MercadoFácil
 
-**Sistema de gerenciamento de produtos, estoque, datas de validade e vendas para um pequeno mercadinho de bairro.**
+**Sistema para auxiliar no gerenciamento de produtos, estoque, datas de validade e vendas de um pequeno mercadinho de bairro.**
 
 Projeto prático da disciplina de **Engenharia de Software I** — Bacharelado em Ciência da Computação, Instituto Federal do Pará (IFPA), Campus Tucuruí.
 
@@ -62,22 +62,38 @@ O sistema foi idealizado para contribuir com a redução de falhas no controle d
 - **CSS3:** estilos, cores e organização visual da interface.
 - **JavaScript (ES6+):** funcionalidades e regras de negócio.
 - **LocalStorage:** armazenamento local dos dados no navegador.
-- **Git e GitHub:** versionamento e hospedagem do código-fonte.
-- **GitHub Pages:** opção de publicação da aplicação web.
+- **Git:** controle de versão do código-fonte.
+- **GitHub:** hospedagem do repositório.
+- **GitHub Pages:** opção para publicação da aplicação web.
 
 ## Estrutura do repositório
 
-A estrutura sugerida para organizar os arquivos do projeto é:
-
 ```text
 MercadoFacil/
-├── index.html       # Página principal da aplicação
-├── style.css        # Estilos e layout do sistema
-├── script.js        # Funcionalidades e regras de negócio
-└── README.md        # Documentação do projeto
+│
+├── index.html
+│   └── Página principal da aplicação
+│
+├── style.css
+│   └── Estilos, cores, layout e responsividade
+│
+├── script.js
+│   └── Funcionalidades e regras de negócio
+│
+└── README.md
+    └── Documentação do projeto
 ```
 
-**Importante:** os nomes acima devem corresponder aos arquivos existentes no repositório. Se o JavaScript ou o CSS estiverem em pastas diferentes, atualize a estrutura para refletir a organização real do projeto.
+### Descrição dos arquivos
+
+- **`index.html`** — contém a estrutura da interface e os elementos das páginas do MercadoFácil.
+- **`style.css`** — define a aparência visual, incluindo cores, espaçamentos, tabelas, formulários e adaptação para diferentes telas.
+- **`script.js`** — implementa as funcionalidades em JavaScript, incluindo cadastros, controle de estoque, alertas de validade e registro de vendas.
+- **`README.md`** — documenta o projeto, seus requisitos, as regras de negócio, as tecnologias utilizadas e as instruções de execução.
+
+Os arquivos HTML, CSS e JavaScript trabalham em conjunto para formar a aplicação web. O HTML organiza a interface, o CSS controla a apresentação visual e o JavaScript implementa as funcionalidades e manipula os dados armazenados no navegador.
+
+*Observação: essa estrutura considera os quatro arquivos na raiz do repositório. Os nomes e caminhos devem corresponder aos arquivos realmente existentes no GitHub.*
 
 ## Como executar o projeto
 
@@ -105,14 +121,12 @@ Em seguida, abra o arquivo `index.html` no navegador.
 
 ## Credenciais de demonstração
 
-Para a versão de demonstração, estão previstas as seguintes credenciais:
-
 | Campo | Valor |
 |---|---|
 | Usuário | `admin` |
 | Senha | `admin123` |
 
-**Atenção:** essas credenciais devem ser utilizadas somente se estiverem configuradas no código da aplicação. Elas são destinadas à demonstração acadêmica, não a um ambiente de produção.
+**Atenção:** as credenciais devem estar configuradas no código da aplicação para que o acesso funcione. Elas são destinadas à demonstração acadêmica e não devem ser utilizadas como autenticação segura em produção.
 
 ## Roteiro de demonstração
 
@@ -144,11 +158,11 @@ Entretanto, o `localStorage` não substitui um banco de dados centralizado. Os d
 2. Entre em **Settings**.
 3. Acesse a seção **Pages**.
 4. Em *Build and deployment*, selecione a opção de publicação a partir de uma branch.
-5. Escolha a branch principal do projeto, normalmente `main`, e a pasta `/ (root)`, caso o `index.html` esteja na raiz.
+5. Escolha a branch principal do projeto, normalmente `main`, e a pasta `/ (root)`, caso o arquivo `index.html` esteja na raiz.
 6. Salve as configurações.
 7. Aguarde a publicação e utilize o endereço disponibilizado pelo GitHub Pages.
 
-O endereço público somente estará disponível após a configuração e a conclusão da publicação.
+O endereço público ficará disponível após a configuração e a conclusão da publicação.
 
 ## Limitações conhecidas
 
@@ -157,7 +171,7 @@ O endereço público somente estará disponível após a configuração e a conc
 - O login é destinado à demonstração e não oferece segurança adequada para produção.
 - Não existe sincronização automática entre dispositivos.
 - Não há integração com sistemas externos de pagamento ou emissão fiscal.
-- O sistema depende de sua implementação em JavaScript para validar as regras de negócio.
+- O sistema depende da implementação em JavaScript para validar as regras de negócio.
 - A disponibilidade das funcionalidades depende de elas estarem efetivamente implementadas e testadas no código atual.
 
 ## Melhorias futuras
