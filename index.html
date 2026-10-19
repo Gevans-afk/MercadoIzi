@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MercadoFácil</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+  <!-- PT-01: Login -->
+  <section id="tela-login" class="tela ativa">
+    <div class="card login-card">
+      <h1>🛒 MercadoFácil</h1>
+      <p class="subtitulo">Gerenciamento do seu mercadinho</p>
+      <form id="form-login">
+        <label for="login-usuario">Usuário</label>
+        <input type="text" id="login-usuario" required autocomplete="username">
+        <label for="login-senha">Senha</label>
+        <input type="password" id="login-senha" required autocomplete="current-password">
+        <button type="submit" class="btn btn-primario">Entrar</button>
+        <p id="login-erro" class="erro"></p>
+      </form>
+      <p class="dica">Demonstração: admin / admin123</p>
+    </div>
+  </section>
+
+  <!-- Área principal -->
+  <div id="app" class="oculto">
+    <header class="topo">
+      <h1>🛒 MercadoFácil</h1>
+      <div>
+        <span id="usuario-logado"></span>
+        <button id="btn-sair" class="btn btn-secundario">Sair</button>
+      </div>
+    </header>
+
+    <nav class="menu">
+      <button class="menu-item ativo" data-tela="dashboard">Início</button>
+      <button class="menu-item" data-tela="produtos">Produtos</button>
+      <button class="menu-item" data-tela="estoque">Estoque</button>
+      <button class="menu-item" data-tela="validade">Validade</button>
+      <button class="menu-item" data-tela="vendas">Vendas</button>
+      <button class="menu-item" data-tela="clientes">Clientes</button>
+    </nav>
+
+    <main>
+      <!-- PT-02: Dashboard -->
+      <section id="tela-dashboard" class="tela ativa">
+        <h2>Resumo</h2>
+        <div class="cards-resumo">
+          <div class="card resumo"><span id="res-produtos">0</span><small>Produtos</small></div>
+          <div class="card resumo"><span id="res-estoque">0</span><small>Itens em estoque</small></div>
+          <div class="card resumo alerta"><span id="res-alertas">0</span><small>Próximos do vencimento</small></div>
+          <div class="card resumo vencido"><span id="res-vencidos">0</span><small>Vencidos</small></div>
+          <div class="card resumo"><span id="res-vendas">R$ 0,00</span><small>Vendas hoje</small></div>
+        </div>
+        <h3>Alertas de validade</h3>
+        <div id="dashboard-alertas" class="lista"></div>
+      </section>
+
+      <!-- PT-03: Cadastro de produtos -->
+      <section id="tela-produtos" class="tela">
+        <h2>Produtos</h2>
+        <form id="form-produto" class="card">
+          <h3 id="produto-form-titulo">Cadastrar produto</h3>
+          <input type="hidden" id="produto-id">
+          <label for="produto-nome">Nome *</label>
+          <input type="text" id="produto-nome" required>
+          <label for="produto-categoria">Categoria *</label>
+          <select id="produto-categoria" required>
+            <option value="">Selecione</option>
+            <option>Alimentos</option>
+            <option>Bebidas</option>
+            <option>Limpeza</option>
+            <option>Higiene</option>
+            <option>Outros</option>
+          </select>
+          <div class="linha">
+            <div>
+              <label for="produto-preco">Preço (R$) *</label>
+              <input type="number" id="produto-preco" min="0" step="0.01" required>
+            </div>
+            <div>
+              <label for="produto-quantidade">Quantidade inicial *</label>
+              <input type="number" id="produto-quantidade" min="0" step="1" required>
+            </div>
+          </div>
+          <label for="produto-validade">Data de validade</label>
+          <input type="date" id="produto-validade">
+          <div class="acoes">
+            <button type="submit" class="btn btn-primario">Salvar</button>
+            <button type="button" id="btn-cancelar-produto" class="btn btn-secundario oculto">Cancelar</button>
+          </div>
+        </form>
+        <input type="search" id="busca-produto" placeholder="Buscar produto..." class="busca">
+        <div class="tabela-wrap">
+          <table>
+            <thead>
+              <tr><th>Nome</th><th>Categoria</th><th>Preço</th><th>Qtd.</th><th>Validade</th><th>Ações</th></tr>
+            </thead>
+            <tbody id="tabela-produtos"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PT-04: Controle de estoque -->
+      <section id="tela-estoque" class="tela">
+        <h2>Controle de estoque</h2>
+        <form id="form-estoque" class="card">
+          <h3>Movimentar estoque</h3>
+          <label for="estoque-produto">Produto *</label>
+          <select id="estoque-produto" required></select>
+          <div class="linha">
+            <div>
+              <label for="estoque-tipo">Tipo *</label>
+              <select id="estoque-tipo" required>
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+              </select>
+            </div>
+            <div>
+              <label for="estoque-quantidade">Quantidade *</label>
+              <input type="number" id="estoque-quantidade" min="1" step="1" required>
+            </div>
+          </div>
+          <label for="estoque-obs">Observação</label>
+          <input type="text" id="estoque-obs" placeholder="Ex.: reposição, perda, ajuste">
+          <button type="submit" class="btn btn-primario">Confirmar</button>
+        </form>
+        <h3>Histórico de movimentações</h3>
+        <div class="tabela-wrap">
+          <table>
+            <thead><tr><th>Data</th><th>Produto</th><th>Tipo</th><th>Qtd.</th><th>Obs.</th></tr></thead>
+            <tbody id="tabela-movimentacoes"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PT-05: Controle de validade -->
+      <section id="tela-validade" class="tela">
+        <h2>Controle de validade</h2>
+        <form id="form-validade" class="card">
+          <h3>Registrar / atualizar validade</h3>
+          <label for="validade-produto">Produto *</label>
+          <select id="validade-produto" required></select>
+          <label for="validade-data">Data de validade *</label>
+          <input type="date" id="validade-data" required>
+          <button type="submit" class="btn btn-primario">Salvar validade</button>
+        </form>
+        <h3 class="titulo-vencido">⛔ Produtos vencidos</h3>
+        <div id="lista-vencidos" class="lista"></div>
+        <h3 class="titulo-alerta">⚠️ Próximos do vencimento (até 7 dias)</h3>
+        <div id="lista-alertas" class="lista"></div>
+        <h3>✅ Dentro da validade</h3>
+        <div id="lista-ok" class="lista"></div>
+      </section>
+
+      <!-- PT-06: Registro de vendas -->
+      <section id="tela-vendas" class="tela">
+        <h2>Registrar venda</h2>
+        <div class="card">
+          <label for="venda-cliente">Cliente (opcional)</label>
+          <select id="venda-cliente"><option value="">Consumidor não identificado</option></select>
+          <div class="linha">
+            <div>
+              <label for="venda-produto">Produto</label>
+              <select id="venda-produto"></select>
+            </div>
+            <div>
+              <label for="venda-quantidade">Quantidade</label>
+              <input type="number" id="venda-quantidade" min="1" step="1" value="1">
+            </div>
+          </div>
+          <button type="button" id="btn-adicionar-item" class="btn btn-secundario">Adicionar item</button>
+          <div class="tabela-wrap">
+            <table>
+              <thead><tr><th>Produto</th><th>Qtd.</th><th>Unitário</th><th>Subtotal</th><th></th></tr></thead>
+              <tbody id="tabela-carrinho"></tbody>
+            </table>
+          </div>
+          <p class="total">Total: <strong id="venda-total">R$ 0,00</strong></p>
+          <button type="button" id="btn-finalizar-venda" class="btn btn-primario">Finalizar venda</button>
+        </div>
+        <h3>Vendas realizadas</h3>
+        <div class="tabela-wrap">
+          <table>
+            <thead><tr><th>Data</th><th>Cliente</th><th>Itens</th><th>Total</th><th>Usuário</th></tr></thead>
+            <tbody id="tabela-vendas"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Clientes (RF-02) -->
+      <section id="tela-clientes" class="tela">
+        <h2>Clientes</h2>
+        <form id="form-cliente" class="card">
+          <h3>Cadastrar cliente</h3>
+          <label for="cliente-nome">Nome *</label>
+          <input type="text" id="cliente-nome" required>
+          <label for="cliente-telefone">Telefone</label>
+          <input type="tel" id="cliente-telefone" placeholder="(94) 99999-9999">
+          <button type="submit" class="btn btn-primario">Salvar</button>
+        </form>
+        <div class="tabela-wrap">
+          <table>
+            <thead><tr><th>Nome</th><th>Telefone</th><th>Ações</th></tr></thead>
+            <tbody id="tabela-clientes"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
